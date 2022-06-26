@@ -15,6 +15,20 @@ test("cloneBranch", async () => {
 	console.log(t.isOk);
 })
 
+test("fetchLatestTag", async () => {
+	var gp = new GitRemoteRepo()
+	gp.url = "https://github.com/deathcap/shellasync.git"
+	var result = await gp.fetchLatestTag()
+	console.log(result.result.tag);
+}, 999999)
+
+test("checkNewTag", async () => {
+	var gp = new GitRemoteRepo()
+	gp.url = "https://github.com/deathcap/shellasync.git"
+	var result = await gp.checkNewTag("2.0.0")
+	console.log(result.result.latestTag);
+}, 999999)
+
 test("loadLocalRepo", async () => {
 	var gp = await GitLocalRepo.fromLocalRepo("../Temp")
 	expect(gp.isOk).toBe(true)
